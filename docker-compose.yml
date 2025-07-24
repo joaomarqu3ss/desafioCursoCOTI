@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: products-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: prod_user
+      POSTGRES_PASSWORD: prod_pass
+      POSTGRES_DB: prod_db
+    volumes:
+      - product_postgres_data:/var/lib/postgresql/data
+    networks:
+      - product-network
+
+  products-app:
+    build: .                # Usa o Dockerfile acima
+    container_name: products-app
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/prod_db
+      SPRING_DATASOURCE_USERNAME: prod_user
+      SPRING_DATASOURCE_PASSWORD: prod_pass
+    depends_on:
+      - postgres
+    networks:
+      - product-network
+
+volumes:
+  product_postgres_data:
+
+networks:
+  product-network:
+    driver: bridge
