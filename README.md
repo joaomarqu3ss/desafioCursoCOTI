@@ -20,4 +20,5 @@ Esta é uma API desenvolvida com Spring Boot em Java 21 para o gerenciamento de 
 - ☕ **Java 21**
 - 🌱 **Spring Boot (Spring Web, Spring Boot DevTools, Spring Data JPA, Lombok, Swagger, Validation)**
 - 🗄️ **Banco de dados relacional (PostgreSQL)**
+- ⚙️ ** Hospedado em um Dockerfile
 - 📦 **Maven para gerenciamento de dependências**
